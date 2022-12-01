@@ -1,0 +1,52 @@
+create table lib ( bookname varchar(15),author varchar(15), publication varchar(10), noofcopies number(4));
+create table books ( bookno number(4), bookname varchar(15),available varchar(10),subscribed_to number(4) );
+
+
+insert into lib values('cn','frozan','tata',4);
+insert into lib values('ooad','scilder','tata',4);
+insert into lib values('dbms','elimasri','tata',4);
+insert into lib values('evs','ravi','scitech',1);
+
+insert into books values(23,'cn','yes',0);
+insert into books values(24,'cn','yes',0);
+insert into books values(25,'cn','yes',0);
+insert into books values(26,'cn','yes',0);
+insert into books values(28,'ooad','yes',0);
+insert into books values(29,'ooad','yes',0);
+insert into books values(30,'ooad','yes',0);
+insert into books values(31,'ooad','yes',0);
+insert into books values(32,'dbms','yes',0);
+insert into books values(32,'dbms','yes',0);
+insert into books values(34,'dbms','yes',0);
+insert into books values(35,'dbms','yes',0);
+insert into books values(37,'evs','yes',0);
+
+
+
+select * from lib;
+
+select * from books;
+
+declare
+bookno number(4);
+bname varchar(15);
+noc number(4);
+author varchar(15);
+publication varchar(10);
+nobooks number(4);
+
+begin
+bookno:= :bookno;
+bname:=:bookname;
+author:=:author;
+publication:=:publication;
+noc:=:noofcopies;
+
+select count(*) into nobooks from lib where bookname=bname;
+if nobooks=0 then
+dbms_output.put_line(' we dont have that book');
+insert into lib values(bname,author,publication,noc);
+else
+dbms_output.put_line(bname||' we have that book');
+end if;
+end;
